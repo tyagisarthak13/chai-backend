@@ -27,3 +27,5 @@ c) git commit -m "put message inside"
 => The .prettierrc file is a configuration file used to define and customize Prettier's behavior in your project. These rules help maintain consistent code formatting across a project.
 
 => We mostly use app.use for middlewares and configuration.
+
+=> bcrypt is a library that helps you hash password.
