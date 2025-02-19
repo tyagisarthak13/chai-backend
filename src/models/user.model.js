@@ -51,14 +51,16 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = bcrypt.hash(this.password, 10);
+  // we have written this if statement b'cuz this pre middleware will run whenever we save the file and hash the peassword everytime.
+  // But we need to hash password whenever we have changed/modified the password, so that's why upper if statement is written.
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
-// Here we have ourselves created isPasswordCorrect as a custom method
+// Here we have ourselves created(designed) isPasswordCorrect as a custom method
 userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
-};
+}; //bcrypt.compare returns boolean value(true when password and encrypted password(this.password) is same and false when it is not same)
 
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
@@ -66,7 +68,7 @@ userSchema.methods.generateAccessToken = function () {
       _id: this._id,
       email: this.email,
       userName: this.userName,
-      fullname: this.fullName,
+      fullName: this.fullName,
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -78,9 +80,6 @@ userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      email: this.email,
-      userName: this.userName,
-      fullname: this.fullName,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {

@@ -29,3 +29,5 @@ c) git commit -m "put message inside"
 => We mostly use app.use for middlewares and configuration.
 
 => bcrypt is a library that helps you hash password.
+
+=> Pre middleware in Mongoose is allowed to execute custom logic before specific operations are performed on a model instance. These operations can include saving documents, validating data, or even removing documents
