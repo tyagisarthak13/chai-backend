@@ -9,7 +9,7 @@ c) git commit -m "put message inside"
 
 => Environment variables in Node are used to store sensitive data such as passwords, API credentials, and other information that should not be written directly in code.
 
-=> devDependencies are the packages a developer needs during development. These dependencies may be needed at some point during the development process, but not during execution.
+=> devDependencies are the packages a developer needs during development. These dependencies may be needed at some point during the development process, but not during production/execution.
 
 =>Below are the files that contain actual programming & business logic. In production, it is recommended that these files & folders be created within a folder named src ( source) for segregation of files.
 
@@ -30,4 +30,6 @@ c) git commit -m "put message inside"
 
 => bcrypt is a library that helps you hash password.
 
-=> Pre middleware in Mongoose is allowed to execute custom logic before specific operations are performed on a model instance. These operations can include saving documents, validating data, or even removing documents
+=> JWT (JSON Web Token) is a compact, secure way to transmit information between two parties as a JSON object. It is commonly used for authentication and authorization in web applications.
+
+=> Pre middleware in Mongoose is allowed to execute custom logic before specific operations are performed on a model instance. These operations can include saving documents, validating data, or even removing documents.
