@@ -33,3 +33,5 @@ c) git commit -m "put message inside"
 => JWT (JSON Web Token) is a compact, secure way to transmit information between two parties as a JSON object. It is commonly used for authentication and authorization in web applications.
 
 => Pre middleware in Mongoose is allowed to execute custom logic before specific operations are performed on a model instance. These operations can include saving documents, validating data, or even removing documents.
+
+=> Cookies are small pieces of data stored on the user's browser by a website. They help websites remember user information, preferences, and session details across visits.
