@@ -2,11 +2,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadonCloudinary } from "../utils/cloudinary.js";
-import {
-  isPasswordCorrect,
-  generateAccessToken,
-  generateRefreshToken,
-} from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const generateAccessandRefreshTokens = async (userId) => {
@@ -17,7 +12,7 @@ const generateAccessandRefreshTokens = async (userId) => {
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
-    return accessToken, refreshToken;
+    return { accessToken, refreshToken };
   } catch (error) {
     throw new ApiError(
       500,
@@ -105,7 +100,8 @@ const loginUser = asyncHandler(async (req, res) => {
   const { userName, email, password } = req.body;
 
   // take username or email
-  if (!userName || !email) {
+  if (!userName && !email) {
+    // if (!(username || email))
     //Depends on what we are trying to login with username or email here for reference we have written both
     throw new ApiError(400, "username or password is required");
   }
@@ -164,8 +160,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   });
 
   const options = {
-    httpOnly: true,
-    secure: true,
+    httpOnly: true, //Prevents client-side JavaScript from accessing the cookie.
+    secure: true, //Ensures the cookie is only sent over HTTPS connections.
   };
 
   return res
