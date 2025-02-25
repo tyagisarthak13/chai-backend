@@ -172,6 +172,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logged Out"));
 });
 
+//! Refresh Access Token -
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
@@ -196,8 +197,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 
     const options = {
-      httpOnly: true,
-      secure: true,
+      httpOnly: true, //Prevents client-side JavaScript from accessing the cookie.
+      secure: true, //Ensures the cookie is only sent over HTTPS connections.
     };
 
     const { accessToken, newRefreshToken } =
